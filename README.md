@@ -1,79 +1,87 @@
-Sistema de Cadastro de Clientes – Java Swing + MySQL
-Este é um projeto simples de sistema de cadastro de clientes, desenvolvido como parte de um teste prático. A aplicação implementa as operações CRUD (Create, Read, Update, Delete) utilizando a linguagem Java, com interface gráfica construída com Swing e persistência de dados em banco de dados MySQL.
+<p align="center">
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:3C1361,50:6A0DAD,100:C77DFF&height=180&section=header&text=Cadastro%20de%20Clientes&fontSize=46&fontColor=ffffff&fontAlignY=36&desc=CRUD%20desktop%20com%20Java%20Swing%20%2B%20JDBC&descSize=17&descAlignY=58&animation=fadeIn" />
+</p>
 
-📋 Funcionalidades
-✅ Cadastro de clientes
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-8+-6A0DAD?style=for-the-badge&logo=openjdk&logoColor=white" />
+  <img src="https://img.shields.io/badge/Java%20Swing-GUI-9D4EDD?style=for-the-badge&logo=java&logoColor=white" />
+  <img src="https://img.shields.io/badge/JDBC-9D4EDD?style=for-the-badge&logo=java&logoColor=white" />
+  <img src="https://img.shields.io/badge/H2-modo%20MySQL-C77DFF?style=for-the-badge&logo=databricks&logoColor=white" />
+  <img src="https://img.shields.io/badge/Maven-C77DFF?style=for-the-badge&logo=apachemaven&logoColor=white" />
+</p>
 
-✅ Consulta de clientes por nome
+---
 
-✅ Edição de dados do cliente
+## 💜 Sobre
 
-✅ Exclusão de clientes
+Aplicação desktop de **cadastro de clientes** com as quatro operações de um CRUD, feita com **Java Swing** e acesso a banco via **JDBC puro**, seguindo o padrão **MVC + DAO**.
 
-✅ Validação de campos e máscara de CPF e telefone
+O banco usado é o **H2 em modo de compatibilidade com MySQL**: ele é criado sozinho na primeira execução, então não precisa instalar nada além do Java.
 
-✅ Confirmação para exclusão e edição (ponto extra)
+Projeto desenvolvido como teste prático para validar conhecimentos de Java, interface gráfica e banco de dados relacional.
 
-✅ Interface amigável usando Java Swing
+## ✨ Funcionalidades
 
-🧰 Tecnologias Utilizadas
-Java 8+
+- ➕ **Incluir** clientes (CPF, nome, e-mail e telefone)
+- 📋 **Listar** todos os clientes numa tabela
+- ✏️ **Atualizar** o cliente selecionado na tabela
+- 🗑️ **Excluir** com **confirmação** antes de apagar
+- 🧹 **Limpar** o formulário
+- ✅ **Validação**: CPF e nome são obrigatórios
+- 🗄️ Tabela criada automaticamente se ainda não existir
 
-Java Swing (GUI)
+## 🧠 O que pratiquei aqui
 
-JDBC
+- Montagem de telas com **Swing** (`GridBagLayout`, `JTable`, `JOptionPane`)
+- **JDBC** com `DataSource`, `PreparedStatement` e *try-with-resources*
+- Separação de responsabilidades em **model / dao / view**
+- Projeto organizado com **Maven**
 
-MySQL
+## 🚀 Como rodar
 
-VSCODE (IDE utilizada no desenvolvimento)
+**Pré-requisitos:** Java 8 ou superior e Maven.
 
-💾 Estrutura da Tabela (MySQL)
-A tabela utilizada no banco de dados possui a seguinte estrutura:
+```bash
+# 1. Clone o repositório
+git clone https://github.com/BrunaPFLima/crud-clientes-java-swing-mysql.git
+cd crud-clientes-java-swing-mysql/cadastro-clientes-novo
 
-sql
-Copiar
-Editar
-CREATE DATABASE cadastro_clientes;
+# 2. Compile e abra a janela
+mvn compile exec:java
+```
 
-USE cadastro_clientes;
+> Também dá pra abrir a pasta `cadastro-clientes-novo` no IntelliJ, Eclipse ou VS Code e rodar a classe `com.exemplo.Main`.
 
-CREATE TABLE cliente (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    cpf VARCHAR(14) NOT NULL,
-    telefone VARCHAR(15),
-    email VARCHAR(100)
+O banco fica no arquivo `src/main/resources/pessoadb.mv.db`, criado na primeira execução.
+
+## 🗄️ Tabela
+
+```sql
+CREATE TABLE IF NOT EXISTS pessoas (
+    cpf      VARCHAR(20) PRIMARY KEY,
+    nome     VARCHAR(100),
+    email    VARCHAR(100),
+    telefone VARCHAR(20)
 );
-🛠️ Como Executar o Projeto
-Instale o MySQL e crie o banco de dados e tabela como mostrado acima.
+```
 
-Abra o projeto no NetBeans.
+## 🗂️ Estrutura
 
-Adicione o driver JDBC (mysql-connector-java) ao classpath do projeto.
+```
+cadastro-clientes-novo/src/main/java/com/exemplo
+├── Main.java          # Ponto de entrada — abre a janela
+├── model/Pessoa.java  # Modelo com os dados do cliente
+├── dao/PessoaDAO.java # Conexão H2 e operações de CRUD via JDBC
+└── view/PessoaForm.java # Tela Swing: formulário, botões e tabela
+```
 
-Configure a conexão com o banco na classe ConexaoBD.java:
+---
 
-java
-Copiar
-Editar
-String url = "jdbc:mysql://localhost:3306/cadastro_clientes";
-String user = "root";
-String password = ""; // ou a senha do seu MySQL
-Execute a classe com a interface gráfica.
+<p align="center">
+  Feito com 💜 por <a href="https://github.com/BrunaPFLima">Bruna Lima</a> ·
+  <a href="https://www.linkedin.com/in/bruna-lima-205360144/">LinkedIn</a>
+</p>
 
-Utilize o formulário para cadastrar, buscar, editar e excluir clientes.
-
-📁 Estrutura de Pacotes
-conexao – Responsável pela classe de conexão com o banco
-
-dao – Contém as operações CRUD
-
-model – Contém a classe Cliente (modelo)
-
-view – Interface gráfica (Swing)
-
-🎯 Objetivo do Projeto
-Este projeto foi desenvolvido como um exercício prático para validar conhecimentos em Java, Swing e banco de dados relacional. É um ótimo ponto de partida para iniciantes em desenvolvimento desktop com Java.
-
-🤝 Contribuição
-Este projeto é pessoal, mas sinta-se à vontade para abrir issues ou enviar pull requests para melhorias!
+<p align="center">
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:C77DFF,50:6A0DAD,100:3C1361&height=90&section=footer" />
+</p>
